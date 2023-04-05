@@ -12,3 +12,5 @@ function print(func)
 
 //function call
 print(add(5,7));
+
+
