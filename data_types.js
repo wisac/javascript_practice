@@ -13,6 +13,8 @@ OBJECT TYPES
 *DYNAMIC TYPE OR LOOSELY TYPE
     Javascript is a loosely typed language, ie data types are dynamincally determined at runtime by checking the type of the data assigned to it. 
 
+
+1. NUMBER DATA TYPE
 *NUMBER SYSTEMS
     Integers can be defined in terms of their base or number system by prefixing the value with a given character. Eg to declare a binary number, prefix it's value with 0b and follow it by the bits of the number
     */
@@ -65,6 +67,33 @@ Number.NEGATIVE_INFINITY;
 /*NaN a value of a calculation that does not yield a number*/
 
 
+
+
+/* 2. STRING DATA TYPE
+Use single qoutes or double qoutes to declare strings. Cannot mixed the two
+
+
+*Template strings
+    They are declared with their values inside a ` ` characters(backtick). They can be used as placeholder within another template strings by using $sign
+
+    The placeholders can be variables, function calls
+*/
+
+const fname = `Kojo`;
+const lname = `Frimpong`;
+const fulname = `${fname} ${lname}`;
+
+console.log(fulname);//Kojo Frimpong
+console.log(`My name is ${fname} ${lname}`);//Kojo Frimpong
+
+function printFull() 
+{
+    return (`${fname} ${lname} is my full name`);
+
+}
+
+console.log(`${printFull()}`);//fucntion call withing template strings placeholder
+//Kwaku Frimpong is my full name
 
 
 
