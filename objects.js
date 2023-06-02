@@ -16,7 +16,7 @@ variable objectName = {
     }
 }
 */
-
+//object literal notation
 let item = {
     name: "laptop", 
     number: 1,
