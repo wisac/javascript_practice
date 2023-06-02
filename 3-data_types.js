@@ -2,9 +2,10 @@
     numbers (int and floats)
     strings
     boolean (true or false)
+    SPECIAL TYPES
     null 
     undefined
-OBJECT TYPES
+REFERENCE DATA TYPES
     objects
     arrays
     functions
