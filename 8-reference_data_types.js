@@ -18,19 +18,17 @@ In this case, assigning one variable to another does not copy the entire object 
 let ages = 
 {
   kofi: 23,
-  yaw: 15,
+  Yaw: 15,
   Ama: 11,
 };
 
 
-let students = ages; // pointer to object ages has been assigned to students. Two variables pointing to same object.
-
-students.kofi += 2; // derefencing pointer to ages/students object and modify object
-
-ages.Ama = 12; // deferecing pointer to ages/students object and modify object
+let footSize = ages; // pointer to object "ages" has been assigned to footSize. Two variables pointing to same object.
+footSize.kofi += 2; // dereference(covertly) pointer to ages and modify object
+ages.Ama = 12; // dereference(covertly) pointer to ages and modify object
 
 console.log(ages); //output: [kofi: 25, Yaw: 15, Ama: 13]
-console.log(students); //output: [kofi: 25, Yaw: 15, Ama: 13]
+console.log(footSize); //output: [kofi: 25, Yaw: 15, Ama: 13]
 
 
 
@@ -38,20 +36,19 @@ console.log(students); //output: [kofi: 25, Yaw: 15, Ama: 13]
 /* PRIMITIVE AND REFERENCE DATA TYPES AS FUNCTION ARGUMENTS
     When you pass a primitive data type as an argument to a function, the argument is passed by value, that is the value of the variable is copied into the function parameters and therefore any change you make to the parameters does not affect the variable passed.
 
-    On the other hand, if you pass a primitive data type as and argument to a function, it is passed by reference and therefore when you modify the parameter values, you indirectly modify the data passed as well.
+    On the other hand, if you pass a reference data type as and argument to a function, it is passed by reference and therefore when you modify the parameter values, you indirectly modify the data passed as well.
 */
-
 
 function updatePrice(item)
 {
   if (item != undefined)
   {
-    if(typeof(item) == "object")
+    if(typeof item == "object")
     {
       item.apple -= 1.89; // modifying argument passed
     }
 
-    if (typeof(item) == "number")
+    if (typeof item == "number")
     {
       item += 1.5; // modifying argument passed
     }
@@ -60,7 +57,6 @@ function updatePrice(item)
   }
 }
 
-
 spoon = 31.87;
 
 fruits = 
@@ -68,7 +64,6 @@ fruits =
   apple: 17.99,
   orange: 4.59
 };
-
 
 console.log(updatePrice(spoon));  // 33.37 
 console.log(spoon);               // 31.87  variable was not modified
