@@ -256,17 +256,195 @@ console.log(item)
         newMusic.stop();
 
 
-    /* The __proto__ property, Object.getPrototypeOf() method and the object.constructor method are all available for checking the protoype and or constructor from which the object was created.
+    /* The __proto__ property, Object.getPrototypeOf() method and the object.constructor method are all available for checking the protoype and or constructor from which the object was created.*/
+
+    console.log(newMusic.__proto__);  // {} Music
+    console.log(Object.getPrototypeOf(newMusic)); // {}  Music
+    console.log(Music.prototype);  // {} Music
+    console.log(newMusic instanceof Music); // true
+    console.log(Music instanceof Music); //false
+    console.log(newMusic.constructor)  //class Music
+
+
+
+
+
+/* CREATING OBJECTS VIA THE OBJECTS.CREATE() FUNCTION
+
+        Since ES5, it is possible to create objects using the Objects.create() helper method.
+
+        The method expects the prototype of the object to be created and the configuration for the properties of the object to be created as an argument.
+
+
+        syntax:
+           variable = Object.create(Nameobject.prototype, 
+            {
+                Property:
+                {
+                    attribute: value
+                },
+
+                Property:
+                {
+                        attribute: value
+                }
+
+            });
+
+           NB: .prototype is required
+
+
+
+*/
+
+
+let poorMovie = Object.create(Movies.prototype,
+{
+    title: 
+    {
+        value: "Her"
+    },
+
+    genre: 
+    {
+        value: "Sci-Fi"
+    },
+
+    year:
+    {
+        value: 2023
+    },
+
+
+    rating:
+    {
+        value: 1
+    },
+
+    //methods 
+    setRating:
+    {
+        value: function(rating)
+        {
+            this.rating = rating;
+        }
+            
+    },
+    getRating:
+    {
+        value: function()
+        {
+            return this.rating;
+        }
+    }
     
+});
+
+
+
+console.log("\nCreating objects using Object.create() method");
+console.log(poorMovie.title); //her
+
+poorMovie.setRating(5); // Not working because the property attribute writable which determines whether the property can be changed or not is by default set to false.
+
+console.log(poorMovie.getRating()); // 1
+
+
+
+/* Property Attributes
+        Aside the value attribute, there are other property attributes which can be used to set individual properties.
+        These include:
+
+        1. writable : This determines by a boolean value whether the property
+            can be changed after it's initialization.
+            DEFAULT = false.
+
+        2. enumerable : This specifies by boolean value whether the property
+            is included when iterating over the properties. 
+            DEFAULT = false
+        
+        3. configurable : This specify by boolean value whether the property can be deleted and it's attribute also modified.
+
+        4. get : Specify the getter function
+
+        5. set : Specify setter function
+
+
+*/
+
+
+
+
     
-    
-    
+let cities = Object.create(Object.prototype, 
+    {
+        name:
+        {
+            value: "Tema", 
+            writable: false, // value attribute cannot be changed
+            configurable: true, //name can be deleted and attributes can be modified
+            enumerable: true    // name is iterable
+        },
+        population:
+        {
+            value:750000,
+            writable: true, //value attribute can be changed
+            configurable: false, //name not cannot be deleted and it's attributes cannot be modified.
+            enumerable: false
+        },
+
+        size: 
+        {
+            value: "764300 sqm",
+            writable: false,
+            configurable: true,
+            enumerable:false
+        }
+    });
+
+
+
+    cities.name = "East Legon";
+    console.log(`\nCity name = ${cities.name}`) // Tema since name is not writable
+    console.log(`Population = ${cities.population}`);
+    cities.population += 500000;
+    console.log(`New Population = ${cities.population}`); //population changed
 
 
 
 
 
 
+/* To access the property/methods attribute, the Object.getOwnPropertyDescriptor() method is used. It takes the object as an argument, and the property/method who's attributes are to be determined.
 
 
 
+
+syntax:
+    let variableName = Object.getOwnPropertyDescriptor(namedObject,"property/method");
+
+
+The method returns an object with the known properties value, enumerable, writable, configurable.
+
+We can then use variableName.attribute to get value of that attribute.
+*/
+
+let propertyDescription = Object.getOwnPropertyDescriptor(cities,"name");
+console.log(propertyDescription.enumerable) // true since name has enumerable attribute set to true;
+console.log(propertyDescription.configurable) //true
+console.log(propertyDescription.writable) //false
+console.log(propertyDescription.value) // Tema
+
+
+
+
+/*WHICH TYPE OF OBJECT CREATION TO USE */
+
+/*
+    Literal notation is used to create simple objects which need only one instance.
+
+    class syntax is used when we want to create an object with many instances. It is prefered to constructor function which are used in exceptional cases.
+
+
+    Use Object.create() method if class syntax is not available such as in runtime environments which does not support ES2015
+*/
