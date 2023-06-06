@@ -203,7 +203,65 @@ console.log(item)
 
 
     
+    /*CREATING OBJECTS USING CLASSES
+        Since ES6, classes are available and serve as the blue print for creating objects.
+
+        syntax:
+                class ClassName 
+                {
+                  
+                    //members
+                }
+
     
+        A constructor method can be created by using the keyword 'constructor'
+        The constructor behaves similar to the constructor function.
+
+
+        An object instance is created from a class by using the new keyword.
+    */
+
+
+        class Music
+        {
+            constructor(artist, album, title, duration,year)
+            {
+                this.artist = artist;
+                this.album = album;
+                this.title = title;
+                this.year = year;
+                this.duration = duration;
+                
+            }
+
+            play()
+            {
+                console.log(`Now Playing ${this.title} || ${this.artist} || ${this.album} || ${this.year}`);
+            }
+
+            stop()
+            {
+                console.log("Music stopped");
+            }
+        }
+
+
+
+        /*Creating object from a class*/
+        const newMusic = new Music("Hillsong", "Of dirt and grace","Touch the sky", 4.32, 2016);
+
+        console.log("Creating objects from class");
+
+        newMusic.play();
+        newMusic.stop();
+
+
+    /* The __proto__ property, Object.getPrototypeOf() method and the object.constructor method are all available for checking the protoype and or constructor from which the object was created.
+    
+    
+    
+    
+
 
 
 
