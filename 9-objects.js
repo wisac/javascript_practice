@@ -230,8 +230,7 @@ console.log(item)
                 this.album = album;
                 this.title = title;
                 this.year = year;
-                this.duration = duration;
-                
+                this.duration = duration;  
             }
 
             play()
@@ -448,3 +447,183 @@ console.log(propertyDescription.value) // Tema
 
     Use Object.create() method if class syntax is not available such as in runtime environments which does not support ES2015
 */
+
+
+
+
+
+
+
+/* ACCESSING PROPERTIES AND CALLING METHODS */
+/* The dot operator is used to access members of an object.
+    The bracket notation can also be used to access members of an object in a situation where using the dot operator would result in syntax error. Such as when the member's name has a minus in it.
+
+
+
+    syntax:
+        OBJECT["member"];
+*/
+
+
+const currency = 
+{
+    "name": "Cedi",
+    "country-used": "Ghana",
+    "exchange rate": 13.0,
+
+
+  
+};
+
+
+
+console.log(currency.name);
+// console.log(currency.country-used) // syntax error
+console.log(currency["country-used"]); //ok
+console.log(currency["exchange rate"]);
+
+/* When using the bracket notation, the property should be in qoutes*/
+
+
+
+
+/*SETTERS AND SETTERS 
+We use the keyword 'set' to declare a setter method and 'get' to declare a getter.
+
+syntax:
+    set methodName() { //code };
+    get methodName() { //code}
+
+    The setMethod and get method can have the same name and when they are called in an assignment statement, the setter would be called and when called in an evaluation statement, the getter will be called.
+
+
+
+    They can be used with objects created through literal, class, constructor fucntion or object.create() method.
+*/
+
+
+
+
+const Animal = 
+{
+    name: "Sheep",
+    quantity: 550,
+
+    get _name()
+    {
+        return this.name;
+    },
+
+
+    set _name(name)
+    {
+        this.name = name;
+    }
+};
+
+
+console.log(Animal._name); // sheep  - getter call in an evaluation statement
+Animal._name = "cat";   // Setter called in an assignement statement
+console.log(Animal._name); // sheep Getter called in an asssignment statement
+
+
+
+
+/* Data properties and Access Properties
+        Data properties are properties which contain data, i.e the variables in the object.
+        Access properties do not container data but they are the setters and getters of data properties.
+
+        From the code above, name is a data property and _name is an access property
+        */
+
+
+
+
+        /* ADDING AND OVERWRITING OBJECT PROPERTIES AND METHODS*/
+        /* Unlike other languages like Java, Object properties and methods can 
+            overwritten and also new ones added using the dot notation.
+
+
+            syntax:
+                objectName.newProperty = value;
+        */
+
+
+        Animal.kind = "Mammal"; // Added kind property and it's value to the object
+        console.log(`Adding and overwriting properties:\nAnimal name = ${Animal.name}`);
+        console.log(Animal.kind)
+        
+       Animal.getQuantity = function()
+       {
+            return this.quantity;
+       }
+
+
+       console.log(`Adding method: getQuantity`);
+       console.log(Animal.getQuantity());
+        
+       //displaying Animal Object
+       console.log(Animal);
+
+
+       //overwriting methods     
+       Animal.getQuantity = function()
+       {
+        console.log(`Method overwritten: Animal quantity now = ${Animal.quantity % 2}`);
+       }
+
+
+       Animal.getQuantity(); //calling new method definition
+
+
+
+       /*Adding properties/methods using bracket notation*/
+       Animal["colour"] = "black";
+       console.log(`Animal color = ${Animal.colour}`); //black
+
+
+       /*CREATING OBJECT PROPERTIES AND METHODS USING HELPER METHOD*/
+       /* Since ES5, JavaScript provides two helper methods for creating object properties and methods.
+
+       Object.defineProperty(obj,'property',property configuration{}) and Object.defineProperties(para0, para1, para2);
+
+       It accepts three arguments:
+       @para0 : The object which new properties are to be added
+       @para1 : The name of the new property/method
+       @para2 : The configuration object for the property.
+       
+       */
+
+
+       
+       const Course = {};
+
+       Object.defineProperty(Course,"name",
+       {
+        value: "Data Structures and Algorithm"
+       })
+
+       console.log("\nCreating properties via helper methods")
+       console.log(Course.name);
+       
+       Object.defineProperties(Course, 
+        {
+            couseCode:
+            {
+                value: "DCIT 207"
+            },
+
+            creditHOurs:
+            {
+                value: 3
+            },
+            duration:
+            {
+                value: 2.00
+            }
+         });
+
+         console.log(`Course code = ${Course.couseCode}`);
+         console.log(`Course weight = ${Course.creditHOurs}`);
+         console.log(`Course duration = ${Course.duration}`);
+
