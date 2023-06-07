@@ -582,7 +582,7 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
        console.log(`Animal color = ${Animal.colour}`); //black
 
 
-       /*CREATING OBJECT PROPERTIES AND METHODS USING HELPER METHOD*/
+    /*CREATING OBJECT PROPERTIES AND METHODS USING HELPER METHOD*/
        /* Since ES5, JavaScript provides two helper methods for creating object properties and methods.
 
        Object.defineProperty(obj,'property',property configuration{}) and Object.defineProperties(para0, para1, para2);
@@ -595,7 +595,7 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
        */
 
 
-       
+       // Adding Properties to and object using Object.defineProperties() helper method
        const Course = {};
 
        Object.defineProperty(Course,"name",
@@ -610,9 +610,8 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
         {
             couseCode:
             {
-                value: "DCIT 207"
+                value: "CS52"
             },
-
             creditHOurs:
             {
                 value: 3
@@ -627,3 +626,53 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
          console.log(`Course weight = ${Course.creditHOurs}`);
          console.log(`Course duration = ${Course.duration}`);
 
+
+
+
+
+    /* DELETING OBJECT MEMBERS */
+         /* Just as members can be added dynamically to an object, members can also be removed or deleted from an object. To do this, the "delete" operator is used.
+         Syntax:
+            delete <obj.member> OR delete <obj[member]>
+
+        NB: It is advisable to check for the presence of the member in the object before attempting the deletion operation.
+        To do this, the "in" operator is used to check for the availability of the member.
+
+         Syntax:
+            if ("member" in obj){
+                //delete member
+            }
+        */
+
+
+            const Phone = {
+                brand: "Samsung",
+                name: "Galaxy S22",
+                "Andriod version": "14.0",
+                "power on": function() {
+                    console.log(`Turning on your ${this.brand} ${this.name}`);
+                }
+            };
+
+        function deleteMember(obj, member) {
+            if (member in obj) {
+                delete obj[member];// [] member could be of type string
+            }
+            else {
+                throw new ReferenceError(`${member} not found in ${obj}`);
+            }
+        }
+
+        console.log("\nDeleting Members");
+        console.log("brand" in Phone)   // true
+        deleteMember(Phone, "brand");   // OK brand deleted
+        console.log("brand" in Phone)   // false
+        deleteMember(Course,"grade");   // throws a reference error
+
+        deleteMember(Course, "name");   // OK but does not work because properties created using Object.defineProperty() by default sets configurable attribute to false. In order to change the configurable attribute, you need to define a new property, copy the old attributes to the new one, configure the new property as desired and then delete the old property.
+
+        console.log("name" in Course); // still outputs true
+    
+        
+
+         
