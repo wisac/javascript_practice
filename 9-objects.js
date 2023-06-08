@@ -801,5 +801,101 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
 
 
 
+/* PREVENTING CHANGES TO OBJECTS */
+/*  Javascript offers three different ways to prevent objects from being modified.
+        1. Preventing extension of objects - Preventing new properties from being added.
+        2. sealing objects - prevent their properties from being redefined or deleted.
+        3. freezing objects - prevent properties values from being modified
+*/
+
+
+/*The Object.preventExtensions(obj) method is used to prevent extension of objects.
+
+        Object.isExtensible() returns True or False indicating that object is extensible or not
+*/
+
+    const Pen = {
+        colour: "red",
+        quantity: 10
+    };
+
+    
+    console.log("\nEXTENSION OF OBJECTS")
+
+    console.log(Object.isExtensible(Pen)); // true
+    Object.preventExtensions(Pen);
+    console.log(Object.isExtensible(Pen)); // false
+    Pen.price = 2; // Would throw typeError exception or code would not have effect on object.
+    delete Pen.colour; // OK deletes colour property
+
+    /*
+    Object.defineProperty(Pen, "type",{
+        value: "Ball pen"                //TypeError since object is not extensible
+    });
+    */
+
+/* SEALING OBJECTS */
+/*  Sealed objects are :
+        1. Not exensible
+        2. Not configurable. i.e Properties cannot be redefined or removed.
+
+
+        Object.isSealed() returns a boolean to indicate whether object is sealed or not
+        NB: Sealed objects by default are NOT extensible 
+*/
+
+
+
+    console.log("\nSEALING OF OBJECTS")
+    console.log(Object.isSealed(Pen)); // false 
+    Object.seal(Pen); // sealing object.
+    console.log(Object.isSealed(Pen)); // true
+    console.log(Object.isExtensible(Pen)) // false
+
+    // Object.defineProperty(Pen,"quantity",{    // TypeError : cannot redefine 
+    //     enumerable: false
+    // });
+
+
+    /*NB
+        //An empty and non extensible object would be sealed by default since it has no property to configure and also cannot be extended
+        */
+
+        let bag = {};
+        Object.preventExtensions(bag);
+        console.log("\nEMPTY OBJECTS AND EXTENSION")
+         console.log(Object.isExtensible(bag)); // false
+        console.log(Object.isSealed(bag)); // true
+
+
+
+        /*FREEZING OBJECTS 
+            The Object.freeze() method ensures that objects cannot be extended, are sealed and their property attributes values cannot be modified
+
+
+            Object.isFrozen() method returns a boolean value indicating the whether object is frozen or not
+        */
+
+
+        console.log("\nFREEZING OBJECTS");
+        console.log(Object.isFrozen(Pen));
+        Object.freeze(Pen);
+        console.log(Object.isFrozen(Pen));
+
+        Pen.quantity = 4; // TyepeError expected
+
 
         
+
+        
+
+
+
+
+
+
+
+
+
+
+
