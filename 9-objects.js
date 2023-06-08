@@ -437,7 +437,7 @@ console.log(propertyDescription.value) // Tema
 
 
 
-/*WHICH TYPE OF OBJECT CREATION TO USE */
+/*WHICH TYPE OF OBJECT CREATION TO USE*/
 
 /*
     Literal notation is used to create simple objects which need only one instance.
@@ -540,8 +540,8 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
 
 
         /* ADDING AND OVERWRITING OBJECT PROPERTIES AND METHODS*/
-        /* Unlike other languages like Java, Object properties and methods can 
-            overwritten and also new ones added using the dot notation.
+        /* Unlike other languages like Java, Object properties and methods can  
+            be overwritten and also new ones added using the dot operator or bracket notation
 
 
             syntax:
@@ -582,6 +582,8 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
        console.log(`Animal color = ${Animal.colour}`); //black
 
 
+
+
     /*CREATING OBJECT PROPERTIES AND METHODS USING HELPER METHOD*/
        /* Since ES5, JavaScript provides two helper methods for creating object properties and methods.
 
@@ -595,32 +597,27 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
        */
 
 
-       // Adding Properties to and object using Object.defineProperties() helper method
+       // Adding Properties to an object using Object.defineProperties() helper method
        const Course = {};
 
-       Object.defineProperty(Course,"name",
-       {
+       Object.defineProperty(Course,"name", {
         value: "Data Structures and Algorithm"
        })
 
        console.log("\nCreating properties via helper methods")
-       console.log(Course.name);
+       console.log(Course.name); // Data Strutures ...
        
-       Object.defineProperties(Course, 
-        {
-            couseCode:
-            {
+       Object.defineProperties(Course, {
+            couseCode: {
                 value: "CS52"
             },
-            creditHOurs:
-            {
+            creditHOurs: {
                 value: 3
             },
-            duration:
-            {
+            duration: {
                 value: 2.00
             }
-         });
+        });
 
          console.log(`Course code = ${Course.couseCode}`);
          console.log(`Course weight = ${Course.creditHOurs}`);
@@ -640,15 +637,13 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
 
          Syntax:
             if ("member" in obj){
-                //delete member
-            }
+                //delete operation }
         */
-
 
             const Phone = {
                 brand: "Samsung",
                 name: "Galaxy S22",
-                "Andriod version": "14.0",
+                "Andriod version": "13.0",
                 "power on": function() {
                     console.log(`Turning on your ${this.brand} ${this.name}`);
                 }
@@ -656,7 +651,7 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
 
         function deleteMember(obj, member) {
             if (member in obj) {
-                delete obj[member];// [] member could be of type string
+                delete obj[member];// [] bcos member could be of type string
             }
             else {
                 throw new ReferenceError(`${member} not found in ${obj}`);
@@ -667,12 +662,122 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
         console.log("brand" in Phone)   // true
         deleteMember(Phone, "brand");   // OK brand deleted
         console.log("brand" in Phone)   // false
-        deleteMember(Course,"grade");   // throws a reference error
+        // deleteMember(Course,"grade");   // throws a reference error
 
         deleteMember(Course, "name");   // OK but does not work because properties created using Object.defineProperty() by default sets configurable attribute to false. In order to change the configurable attribute, you need to define a new property, copy the old attributes to the new one, configure the new property as desired and then delete the old property.
 
         console.log("name" in Course); // still outputs true
     
         
+
+
+
+        /* NB: The delete operator is not same as assigning  "null" or "undefined" to a property. "null" sets the property to null whilst "undefined" sets the value of the property to undefined, but delete completely removes the property and its value.
+        */
+
+
+
+    /* OUTPUTING OBJECT PROPERTIES AND METHODS */
+        /*     To output all properties and methods of an object, there are two options.
+
+            1. Using 'for-in' loop
+            2. USe Object.keys(), Object.value() and Object.entries()
+
+
+        /* Using for-in loop
+        NB: Properties must have an attribute of enumerable set to true
+        
+            syntax:
+                for (let propName in obj) {
+                    console.log(propName);
+                    console.log(obj[propName]);
+                }
+        */
+       console.log("\nIterating over object properties\nUsing for-in loop");
+
+        let Country = {
+            name: "Ghana",
+            continent: "Africa",
+            population: 0xDA54A4,
+            IncreasePopulation: function(newCitizens) {
+                this.population += newCitizens; 
+            }
+        };
+
+        for(let props in Country) {
+            console.log("Property = ",props); //name continent population
+            console.log("Value = ",Country[props]); //Ghana Africa 424242
+        }
+
+
+
+        /* Using Object.keys() 
+                This helper method returns an array of all enumerable properties of the object without their values.
+                Syntax: 
+                    let arr = Object.keys(obj);
+        */
+
+        let propArray = Object.keys(Country);
+        for (let i = 0; i < propArray.length; i++) {
+            console.log(propArray[i]); // name continent population increasePop.
+        }
+
+        
+        /* Using Object.values()
+            This helper method returns an array of all enumerable properties values only. 
+                syntax:
+                    let arr = Object.values(obj);
+        */
+
+        let valArray = Object.values(Country);
+        for (let i = 0; i < valArray.length; i++) {
+            console.log(valArray[i]); //Ghana Africa 4579745 increasePop...
+        }
+
+
+
+        /* Using Object.entries()
+            This helper method returns array of arrays which is made up of key-value pairs
+        */
+
+        let pairArray = Object.entries(Country);
+        for (let i = 0; i < pairArray.length; i++) {
+            console.log(pairArray[i]);
+        }
+
+        /* NB: The for-in loop also iterates over the objects prototype but object.keys() only returns property names of the instance passed.
+        */
+
+        const NewCountry = Object.create(Country, {
+            language: {
+                value: "English",
+                enumerable: true
+            }
+        });
+
+
+        console.log("\nFOR-IN VS OBJECT.KEYS\n");
+        console.log(Country);// 
+        console.log(NewCountry);// {language: english}
+        console.log(Country.language); // undefined
+        console.log(NewCountry.language); // english
+
+
+        // iterating over NewCountry but this will also display properties from its prototype
+        console.log("\nFOR-IN LOOP ITERATION");
+        for (let newProps in NewCountry) {
+            console.log(newProps);
+        }
+
+        // iterating over newCountry this will not iterate over prototype
+        console.log("\nOBJECT.KEYS ITERATION");
+        let newArray = Object.keys(NewCountry);
+        for (let i = 0; i < newArray.length; i++) {
+            console.log(newArray[i]);
+        }
+        
+
+
+
 
          
