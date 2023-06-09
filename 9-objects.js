@@ -755,13 +755,10 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
             }
         });
 
-
         console.log("\nFOR-IN VS OBJECT.KEYS\n");
-        console.log(Country);// 
         console.log(NewCountry);// {language: english}
         console.log(Country.language); // undefined
         console.log(NewCountry.language); // english
-
 
         // iterating over NewCountry but this will also display properties from its prototype
         console.log("\nFOR-IN LOOP ITERATION");
@@ -858,13 +855,13 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
 
 
     /*NB
-        //An empty and non extensible object would be sealed by default since it has no property to configure and also cannot be extended
+        //An empty and non extensible object would be sealed by default since it has no property to be configure and also cannot be extended
         */
 
         let bag = {};
         Object.preventExtensions(bag);
         console.log("\nEMPTY OBJECTS AND EXTENSION")
-         console.log(Object.isExtensible(bag)); // false
+        console.log(Object.isExtensible(bag)); // false
         console.log(Object.isSealed(bag)); // true
 
 
@@ -885,7 +882,7 @@ console.log(Animal._name); // sheep Getter called in an asssignment statement
         Pen.quantity = 4; // TyepeError expected
 
 
-        
+
 
         
 
