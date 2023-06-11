@@ -31,7 +31,7 @@ let arr3 = new Array("mango"); //creates an array with one element
         shift() : Removes first element from the array and returns it
         unshift() : Adds element at the beginning and return new length
 
-        splice() : Inserts elements at specific index, can delete before inserting new elements
+        splice() : Inserts elements at specific index, can delete before inserting new elements. It returns an array of the removed elements
             
             syntax:
                 arr.splice(start index, number of elem to be deleted, elements to insert);
@@ -57,6 +57,22 @@ let arr3 = new Array("mango"); //creates an array with one element
 
 
     /* COPY ELEMENTS FROM AN ARRAY */
+    /* slice() : It is used to copy elements from an array. It returns an array containing the copied elements. 
+    
+    It takes two arguments :
+    @param0 - the index from which the extraction should start.
+    @param1 = the index from which the extraction should end. If this is not supplied, extraction ends at end of array.
+    */
+
+    let names = ["James", "Luke", "Lily", "Ethan", "Moore"];
+
+    console.log(`Slided = ${names.slice(1,4)}`); // Luke, lily, Ethan
+    console.log("Names = ", names);
+
+    console.log(names.slice(2,-1));
+    
+
+
     
 
     
