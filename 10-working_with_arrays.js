@@ -57,19 +57,41 @@ let arr3 = new Array("mango"); //creates an array with one element
 
 
     /* COPY ELEMENTS FROM AN ARRAY */
-    /* slice() : It is used to copy elements from an array. It returns an array containing the copied elements. 
+    /*The slice() method is used to copy elements from an array. It returns an array containing the copied elements. 
     
     It takes two arguments :
     @param0 - the index from which the extraction should start.
     @param1 = the index from which the extraction should end. If this is not supplied, extraction ends at end of array.
     */
 
-    let names = ["James", "Luke", "Lily", "Ethan", "Moore"];
+    let names = ["zero", "one", "two", "three", "four"];
 
     console.log(`Slided = ${names.slice(1,4)}`); // Luke, lily, Ethan
     console.log("Names = ", names);
 
-    console.log(names.slice(2,-1));
+    console.log(names.slice(2,-1)); // from 2 to 4 
+    console.log(names.slice(0,-3));
+    console.log(names.slice(-4, -1)); 1, 4 // lily ethan
+    console.log(names.slice(-2,1)); // ; // 3, 1 Not work
+    console.log(names.slice(2,8)); // 2 to end
+
+    /* NB: @start
+            If only one args is given, if positive, start from that index and extract till the end inclusive
+            If negative, start from the back and extract last inclusive
+
+            If two args are given, if negative add length to start. 
+
+            @end
+                If negative, add length ot it and exclude end index
+
+            If after adding length to it the first is larger than last, it woudl not work
+
+            If end > length, length is used
+            */
+
+
+
+    
     
 
 
