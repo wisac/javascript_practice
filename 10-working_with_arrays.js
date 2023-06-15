@@ -187,7 +187,51 @@ console.log(queue.lastIndexOf(6));
     console.log(queue.includes(13)); // false
 
 
-    
+
+    /* USING find() and findIndex() methods
+
+        Both methods accept a test function. find() returns the first occurrance of an element which satisfies the condition and findIndex() returns the index of the first element which meets the condition.
+        
+
+        Syntax: 
+          array.find(callback(element[, index[, array]])[, thisArg])
+
+                *array: The array on which the find() method is called.
+
+                *callback: A function that is called for each element in the array. It accepts three arguments:
+
+                *element: The current element being processed in the array.
+
+                *index (optional): The index of the current element being processed.
+
+                *array (optional): The array on which the find() method was called.
+
+                *thisArg (optional): An object that will be used as the this value within the callback function.
+*/
+
+const integers = [4,6,29,0,1,7,43,223,87,10];
+
+const even = integers.find(function (element) 
+{
+    if (element % 2 == 0)
+        return element;
+});
+     
+console.log("\nUSING FIND AND FINDINDEX METHODS\n");
+console.log(even);
+
+const largeNum = integers.find(element => element > 100);
+console.log(largeNum);
+
+const odd = integers.findIndex(element => element % 2 == 1);
+console.log(odd);
+
+
+
+
+
+
+
 
 
  
