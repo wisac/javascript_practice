@@ -209,25 +209,110 @@ console.log(queue.lastIndexOf(6));
                 *thisArg (optional): An object that will be used as the this value within the callback function.
 */
 
-const integers = [4,6,29,0,1,7,43,223,87,10];
+                const integers = [4,6,29,0,1,7,43,223,87,10];
 
-const even = integers.find(function (element) 
-{
-    if (element % 2 == 0)
-        return element;
-});
-     
-console.log("\nUSING FIND AND FINDINDEX METHODS\n");
-console.log(even);
+                const even = integers.find(function (element) 
+                {
+                    if (element % 2 == 0)
+                        return element;
+                });
+                    
+                console.log("\nUSING FIND AND FINDINDEX METHODS\n");
 
-const largeNum = integers.find(element => element > 100);
-console.log(largeNum);
+                console.log(even); // 6
 
-const odd = integers.findIndex(element => element % 2 == 1);
-console.log(odd);
+                const largeNum = integers.find(element => element > 100); //222
+                console.log(largeNum);
+
+                const odd = integers.findIndex(element => element % 2 == 1);
+                console.log(odd); // 2
 
 
 
+/* COPY ELEMENTS WITHIN AN ARRAY 
+    As of ES6, it is possible to copy elements within an array. That is copy elements from one part of the array to another part of the same array.
+
+
+    copyWithin() method takes three arguments 
+     1. The destination starting index
+     2. The source starting index
+     3. The source end index
+
+*/
+
+
+const cars = ["Mercedez","Toyota","Honda","Land Rover", "Jaguar", "Audi", "KIA"];
+console.log("\nUSING copyWithin method");
+console.log(cars);
+cars.copyWithin(1,3,4);
+console.log(cars);
+
+
+/*CONVERTING ARRAYS TO FUNCTIONS 
+    To convert arrays into a string (and output it to the console, for
+example), you have several options. On the one hand, you can use
+the toString(), toLocaleString(), and valueOf() methods. On the
+other hand, arrays offer the join() method, which can be used to
+join the individual elements of an array into a string. In this case, it’s
+possible to specify a string as a parameter that is to be used as a
+separator.
+*/
+
+const namez = ['John', 'James', 'Peter'];
+const namesString = namez.toString();
+console.log(namesString); // Output: John,James,Peter
+
+const namesLocaleString = namez.toLocaleString();
+console.log(namesLocaleString); // Output: John,James,Peter
+
+const namesValue = namez.valueOf();
+console.log(namesValue); // Output: ["John", "James", "Peter"]
+
+const namesJoined = namez.join('-'); // it takes a string as a separator
+console.log(namesJoined);  // Output: John-James-Peter
+
+
+
+/* EXTRACTING VALUES FROM ARRAYS AND OBJECTS 
+    Destructuring of arrays or object refers to assigning object properties or array elements to variables. This saves us from writing redundant code
+
+    Array destructuring provides a simple way to assign the elements of an array to a variable
+
+    NB: Destructuring does not affect the original values in the array.
+*/
+
+/*Extrating values from array without destructuring technique. 
+Redundant and WET code*/
+
+const cities = ["Accra", "Kumasi", "Wa", "Ho"];
+const city1 = cities[0];
+const city2 = cities[1];
+const city3 = cities[2];
+const city4 = cities[3];
+
+
+/*Extracting from array with destructuring technique
+        syntax:
+            let [var1,var2,...] = array
+*/
+
+const [cityA, cityB, cityC, cityD] = cities; // simply and DRY code
+console.log(cityA,cityB,cityC,cityD); // Accra Kumasi Wa Ho
+
+/*NB: If the variables already exist, ignore the const, let or var keyword 
+    Default values can also be defined for variable in the array destructuring in order to prevent them from being assigned the undefined.
+*/
+
+const [ town1 = "Hohoe",town2 = "sunyi",town3, town4, town5="Cape"] = cities;
+console.log(town1,town2,town3,town4,town5);
+
+
+/* To extract only specific values, provide no variable at the corresponging position and leave a comma in place.
+*/
+
+
+const [c1,,c3,c4,,] = cities;
+console.log(c1,c3,c4);
 
 
 
@@ -235,6 +320,9 @@ console.log(odd);
 
 
  
+
+
+
 
 
 
